@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>molamola's article</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <link rel="stylesheet" type="text/css" href="/statics/css/index.css" media="all" />
+    <link rel="stylesheet" type="text/css" href="/statics/css/detail.css" />
+    <link rel="stylesheet" type="text/css" href="/molablog/statics/js/themes/iframe.css">
+    <style id="pre">
+        pre {
+            margin: .5em 0;
+            padding: .4em .6em;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.05);
+            font-size: 14.5px;
+            overflow-x: auto;
+            word-wrap: break-word;
+        }
+    </style>
+    <style id="tablesort">
+        table.sortEnabled tr.firstRow th,
+        table.sortEnabled tr.firstRow td {
+            padding-right: 20px;
+            background-repeat: no-repeat;
+            background-position: center right;
+            background-image: url(/molablog/statics/js/themes/default/images/sortable.png);
+        }
+    </style>
+    <style id="table">
+        .selectTdClass {
+            background-color: #edf5fa !important
+        }
+
+        table.noBorderTable td,
+        table.noBorderTable th,
+        table.noBorderTable caption {
+            border: 1px dashed #ddd !important
+        }
+
+        table {
+            margin-bottom: 10px;
+            border-collapse: collapse;
+            display: table;
+        }
+
+        td,
+        th {
+            padding: 5px 10px;
+            border: 1px solid #DDD;
+        }
+
+        caption {
+            border: 1px dashed #DDD;
+            border-bottom: 0;
+            padding: 3px;
+            text-align: center;
+        }
+
+        th {
+            border-top: 1px solid #BBB;
+            background-color: #F7F7F7;
+        }
+
+        table tr.firstRow th {
+            border-top-width: 2px;
+        }
+
+        .ue-table-interlace-color-single {
+            background-color: #fcfcfc;
+        }
+
+        .ue-table-interlace-color-double {
+            background-color: #f7faff;
+        }
+
+        td p {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <style id="list">
+        .list-paddingleft-1 {
+            padding-left: 0
+        }
+
+        .list-paddingleft-2 {
+            padding-left: 30px
+        }
+
+        .list-paddingleft-3 {
+            padding-left: 60px
+        }
+    </style>
+    <style id="pagebreak">
+        .pagebreak {
+            display: block;
+            clear: both !important;
+            cursor: default !important;
+            width: 100% !important;
+            margin: 0;
+        }
+    </style>
+    <style id="loading">
+        .loadingclass {
+            display: inline-block;
+            cursor: default;
+            background: url('/molablog/statics/js/themes/default/images/loading.gif') no-repeat center center transparent;
+            border: 1px solid #cccccc;
+            margin-left: 1px;
+            height: 22px;
+            width: 22px;
+        }
+
+        .loaderrorclass {
+            display: inline-block;
+            cursor: default;
+            background: url('/molablog/statics/js/themes/default/images/loaderror.png') no-repeat center center transparent;
+            border: 1px solid #cccccc;
+            margin-right: 1px;
+            height: 22px;
+            width: 22px;
+        }
+    </style>
+    <style id="anchor">
+        .anchorclass {
+            background: url('/molablog/statics/js/themes/default/images/anchor.gif') no-repeat scroll left center transparent;
+            cursor: auto;
+            display: inline-block;
+            height: 16px;
+            width: 15px;
+        }
+    </style>
+    <!--live看板娘-->
+    <link rel="stylesheet" type="text/css" href="/statics/css/waifu.css" />
+    <link rel="stylesheet" type="text/css" href="/statics/css/flat-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="/statics/css/calender.css" />
+</head>
+<body class="home blog custom-background round-avatars" itemscope itemtype="http://schema.org/Organization">
+<div class="Yarn_Background" style="background-image: url(/abs.jpg);"></div>
+<form class="js-search search-form search-form--modal" method="get" action="/search.html" role="search">
+    <div class="search-form__inner">
+        <div>
+            <div id="search-container" class="ajax_search">
+                <form method="get" id="searchform" action="">
+                    <div class="filter_container"><input type="text" value="" autocomplete="off" placeholder="写完敲回车"
+                                                         name="keyword" id="search-input" />
+                        <ul id="search_filtered" class="search_filtered"></ul>
+                    </div>
+                    <input type="submit" name="submit" id="searchsubmit" class="searchsubmit" value="" />
+                </form>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="navi" data-aos="fade-down">
+    <div class="bt-nav">
+        <div class="line line1"></div>
+        <div class="line line2"></div>
+        <div class="line line3"></div>
+    </div>
+    <div class="navbar animated fadeInRight">
+        <div class="inner">
+            <nav id="site-navigation" class="main-navigation">
+                <div id="main-menu" class="main-menu-container">
+                    <div class="menu-menu-container">
+                        <ul id="primary-menu" class="menu">
+                            <li id="menu-item-17"
+                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17">
+                                <span class="menu-dropdown"><i class="iconfont">\uE619</i></span>
+                                <a href="/">首页</a>
+                                <ul class="sub-menu">
+                                    <li id="menu-item-165"
+                                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-165">
+                                        <a href="/?decs=2">按浏览量排序</a>
+                                    </li>
+                                    <li id="menu-item-163"
+                                        class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-163">
+                                        <a href="/?decs=1">按时间排序</a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li id="menu-item-19"
+                                class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17">
+                                <a href="/category.html">分类</a>
+                            </li>
+                            <li id="menu-item-78"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-78">
+                                <a href="/link.html">链接</a>
+                            </li>
+                            <li id="menu-item-57"
+                                class="menu-item menu-item-type-post_type menu-item-object-page menu-item-57">
+                                <a href="/tell.html">留言</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- #site-navigation -->
+        </div>
+    </div>
+</div>
+<div class="hebin" data-aos="fade-down">
+    <i class=" js-toggle-search iconfont">&#xe60e;</i>
+</div>
+<header id="masthead" class="overlay animated from-bottom" itemprop="brand" itemscope
+        itemtype="http://schema.org/Brand">
+    <div class="site-branding text-center">
+        <a href="">
+            <figure>
+                <img class="custom-logo avatar" src="/statics/images/omikron.png" />
+            </figure>
+        </a>
+        <h3 class="blog-description">
+            <p>This is mola</p>
+        </h3>
+    </div>
+    <!-- .site-branding -->
+    <div class="decor-part">
+        <div id="particles-js"></div>
+    </div>
+    <div class="animation-header">
+        <div class="decor-wrapper">
+            <svg id="header-decor" class="decor bottom" xmlns="http://www.w3.org/2000/svg" version="1.1"
+                 viewBox="0 -1 100 100" preserveAspectRatio="none">
+                <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+                <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+                <path class="medium left" d="M0 100 L50 50 L0 33.3" fill="rgba(255,255,255, .3)"></path>
+                <path class="medium right" d="M100 100 L50 50 L100 33.3" fill="rgba(255,255,255, .3)"></path>
+                <path class="small left" d="M0 100 L50 50 L0 66.6" fill="rgba(255,255,255, .5)"></path>
+                <path class="small right" d="M100 100 L50 50 L100 66.6" fill="rgba(255,255,255, .5)"></path>
+                <path d="M0 99.9 L50 49.9 L100 99.9 L0 99.9" fill="rgba(255,255,255, .63)"></path>
+                <path d="M48 52 L50 49 L52 52 L48 52" fill="rgba(255,255,255, .35)"></path>
+            </svg>
+        </div>
+    </div>
+</header>
+<div id="main" class="content">
+    <div id="social">
+        <ul>
+            <li>
+                <a href="" id="qzone_share" title="qzone" target="_blank"><i class="iconfont">&#xe67f;</i></a>
+            </li>
+            <li>
+                <a href="" id="weibo_share" title="weibo" target="_blank"><i class="iconfont">&#xe680;</i></a>
+            </li>
+            <li>
+                <a href="" id="douban_share" title="douban" target="_blank"><i class="iconfont">&#xe681;</i></a>
+            </li>
+            <li>
+                <a href="" id="twitter_share" title="twitter" target="_blank"><i class="iconfont">&#xe683;</i></a>
+            </li>
+        </ul>
+    </div>
+    <div class="container">
+        <article id="post-1202"
+                 class="js-gallery post-1202 post type-post status-publish format-standard has-post-thumbnail hentry category-uncategorized tag-11 tag-22 tag-29">
+            <style>
+                .container {
+                    padding: 10px 0px;
+                }
+
+                .post {
+                    margin: 0 auto
+                }
+            </style>
+            <section class="post_content" id="blog_content">
+
+                <header class="post_header">
+                    <h1 class="post_title" id="post_title" th:text="${title}"></h1>
+                </header>
+                <div class="meta split split--responsive cf">
+                    <div class="split__title">
+                        <time datetime="2017-10-02 01:44" id="time" style="margin-right: 10px;" th:text="${createTime}"></time>
+                        <span class="">
+                            <a href="" id="tag" rel="tag" style="color: currentColor;">主题</a>
+                            <a href="" id="tag1" rel="tag" style="color: currentColor;" th:text="${className}"></a>
+                            <a href="" id="tag2" rel="tag" style="color: currentColor;"></a>
+                        </span>
+                    </div>
+                    <div id="social-share"><span class="entypo-share"><i class="iconfont"></i>分享</span></div>
+                </div>
+                <div th:utext = "${content}"></div>
+            </section>
+        </article>
+    </div>
+
+    <!--<svg id="upTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+            <path d="M0 0 L50 100 L100 0 Z"></path>
+           </svg>-->
+
+    <div id="panel">
+        <div class="comment-area">
+            <section class="comments">
+                <div class="comments-main">
+                    <div id="comments-list-title"><span>0</span> 条评论 </div>
+                    <div id="loading-comments">
+                        <div class="host">
+                            <div class="loading loading-0"></div>
+                            <div class="loading loading-1"></div>
+                            <div class="loading loading-2"></div>
+                        </div>
+                    </div>
+
+                    <nav id="" style="
+                    clear: both;
+                    text-align: right;
+                    max-width: 800px;
+                    color: #9A9A9A;
+                    padding-top: 20px;">
+
+                        <a class="prev page-numbers" href="javascript:prePage(); ">
+                            &lt;&lt;&lt;</a>
+                        <a class="page-numbers current" aria-current="page" href="javascript:nextPage();">next</a>
+
+
+                    </nav>
+                    <div id="respond" class="comment-respond">
+                    <h6 id="replytitle" class="comment-reply-title"><a rel="nofollow"
+                                                                       id="cancel-comment-reply-link" href="" style="display:none;">取消</a></h6>
+                    <form action="javascript:" method="post" id="commentform" class="clearfix"
+                          enctype="application/json ">
+                        <div class="clearfix"></div>
+                        <div class="author-info">
+                            <input type="text" name="name" id="name" placeholder="昵　称 : " tabindex="1"
+                                   title="Name (required)">
+                            <input type="text" name="email" id="email" placeholder="邮　箱 : " tabindex="2"
+                                   title="E-mail(will not be published) required">
+                            <input type="text" name="friendLink" id="friendLink" placeholder="链　接 : "
+                                   tabindex="3" title="Website">
+                        </div>
+                        <div class="clearfix"></div>
+                        <input type="hidden" name="blogId" id="blogId" value="0">
+                        <div class="comment-form-info">
+                            <p class="input-row">
+                                        <textarea class="text_area" rows="3" cols="80" name="imgLink" id="imgLink"
+                                                  tabindex="4" placeholder="自定义你的头像链接~ps:请遵守法律(" style="
+                   margin-left: 64px;
+                   width: 100%;" onblur="checkImg()"></textarea>
+                            </p>
+                        </div>
+                        <div class="comment-form-info">
+                            <div class="real-time-gravatar"> <img id="molamola-img" src="/favicon.ico"
+                                                                  alt="molamola头像">
+                            </div>
+                            <p class="input-row">
+                                <i class="row-icon"></i>
+                                <textarea class="text_area" rows="3" cols="80" name="content" id="content"
+                                          tabindex="4" placeholder="你不说两句吗？(°∀°)ﾉ……"></textarea>
+                                <input type="submit" name="submit" class="button" id="submit" tabindex="5"
+                                       value="发送">
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!--<svg id="dwTriangleColor" width="100%" height="40" viewBox="0 0 100 102" preserveAspectRatio="none">
+            <path d="M0 0 L50 100 L100 0 Z"></path>
+            </svg>-->
+    <div class="wrapper">
+    </div>
+</div>
+
+<div class="p-header">
+    <figure class="p-image"
+            style="background-image: url(statics/images/47fb3c_9afed6c259f94589881bd55376206366mv2_d_3840_5784_s_4_2.jpg);">
+    </figure>
+</div>
+<div class="navpost-part">
+    <div id="NextPrevPosts">
+        <div class="prev" data-aos="slide-right" data-aos-delay="1.5s" style="opacity: 0.2">
+            <div class="arrow"><i class="iconfont">&#xe625;</i></div>
+            <div class="preview">
+                <div class="pull-left featuredImg" style="background-image:url('/favicon.ico');"></div>
+                <a class="pull-left preview-content bold" id="leftInfo" href="#"><span></span></a>
+            </div>
+        </div>
+        <div class="next" data-aos="slide-left" data-aos-delay="1.5s" style="opacity: 0.2">
+            <div class="arrow"><i class="iconfont">&#xe623;</i></div>
+            <div class="preview">
+                <div class="pull-right featuredImg" style="background-image:url('/favicon.ico');"></div>
+                <a class="pull-right preview-content bold" id="rightInfo" href="#"><span></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer id="footer" class="overlay animated from-top">
+    <div class="root">
+    <div class="calendar">
+        <div class="header">
+            <a data-action="prev-month" href="javascript:void(0)" title="Previous Month"><i></i></a>
+            <div class="text" data-render="month-year"></div>
+            <a data-action="next-month" href="javascript:void(0)" title="Next Month"><i></i></a>
+        </div>
+        <div class="months" data-flow="left">
+            <div class="month month-a">
+                <div class="render render-a"></div>
+            </div>
+            <div class="month month-b">
+                <div class="render render-b"></div>
+            </div>
+        </div>
+    </div>
+</div>
+    <div class="waifu">
+        <div class="waifu-tips"></div>
+        <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+        <div class="waifu-tool">
+            <span class="fui-home"></span>
+            <span class="fui-chat"></span>
+            <span class="fui-eye"></span>
+            <span class="fui-user"></span>
+            <span class="fui-photo"></span>
+            <span class="fui-info-circle"></span>
+            <span class="fui-cross"></span>
+        </div>
+    </div>
+    <div class="decor-wrapper">
+        <svg id="footer-decor" class="decor top" xmlns="http://www.w3.org/2000/svg" version="1.1"
+             viewBox="0 0 100 100" preserveAspectRatio="none">
+            <path class="large left" d="M0 0 L50 50 L0 100" fill="rgba(255,255,255, .1)"></path>
+            <path class="large right" d="M100 0 L50 50 L100 100" fill="rgba(255,255,255, .1)"></path>
+            <path class="medium left" d="M0 0 L50 50 L0 66.6" fill="rgba(255,255,255, .3)"></path>
+            <path class="medium right" d="M100 0 L50 50 L100 66.6" fill="rgba(255,255,255, .3)"></path>
+            <path class="small left" d="M0 0 L50 50 L0 33.3" fill="rgba(255,255,255, .5)"></path>
+            <path class="small right" d="M100 0 L50 50 L100 33.3" fill="rgba(255,255,255, .5)"></path>
+            <path d="M0 0 L50 50 L100 0 L0 0" fill="rgba(255,255,255, .63)"></path>
+            <path d="M48 48 L50 51 L52 48 L48 48" fill="rgba(255,255,255, .35)"></path>
+        </svg>
+    </div>
+    <div class="socialize" data-aos="zoom-in">
+        <li>
+            <a title="weibo" class="socialicon" href=""><i class="iconfont" aria-hidden="true">&#xe601;
+            </i></a>
+        </li>
+        <li class="wechat">
+            <a class="socialicon"><i class="iconfont">&#xe609;</i></a>
+            <div class="wechatimg"><img src="/statics/images/weixin.png"></div>
+        </li>
+        <li class="wechat">
+            <a class="socialicon"><i class="iconfont">&#xe616;</i></a>
+            <div class="wechatimg"><img src="/statics/images/qq.jpg"></div>
+        </li>
+    </div>
+    <div class="cr">
+        Copyright&copy;2018
+    </div>
+    <script type="text/javascript">
+        window.onscroll = function () {
+            var scrollTop = document.body.scrollTop;
+            if (scrollTop >= 200) {
+                document.getElementById("NextPrevPosts").style.display = "none"
+            } else {
+                document.getElementById("NextPrevPosts").style.display = "block"
+            }
+        }
+    </script>
+    <script type="text/javascript" src="/statics/js/calender.js"></script>
+    <script type='text/javascript' src='/statics/js/jquery.min.js'></script>
+    <script type='text/javascript' src='/statics/js/load.js'></script>
+    <script type='text/javascript'>
+        //启动加载器
+        $("header").append(getSpinner());
+    </script>
+    <script type='text/javascript' src='/statics/js/plugins.js'></script>
+    <script type='text/javascript' src='/statics/js/script.js'></script>
+    <script type='text/javascript' src='/statics/js/sweetalert.min.js'></script>
+    <script type='text/javascript' src='/statics/js/particles.js'></script>
+    <script type='text/javascript' src='/statics/js/aos.js'></script>
+    <script type='text/javascript' src='/statics/js/prism.js'></script>
+    <script type='text/javascript' src='/statics/js/gravatar.js'></script>
+    <script type='text/javascript' charset="utf-8">
+
+        //获取页面传来的blogId
+        var href = location.href;
+        var blogId = href.substring(href.indexOf("page")+5);
+
+
+        //分享
+        getShareLinks($(".post_title")[0].innerText);
+
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+            //构造一个含有目标参数的正则表达式对象
+
+            var r = window.location.search.substr(1).match(reg);
+            //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+
+        function getShareLinks(title) {
+            var qzone_url = "https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=" + window.location + "&title=molamola的博客分享：" + title + "&desc=&summary=&site=";
+            $("#qzone_share").attr("href", qzone_url);
+            var weibo_share = "http://service.weibo.com/share/share.php?url=" + window.location + "&title=" + title + "&appkey=1343713053&searchPic=true#_loginLayer_1553086117722";
+            $("#weibo_share").attr("href", weibo_share);
+            var douban_url = "https://www.douban.com/share/service?href=" + window.location + "&name=" + title + "&text=";
+            $("#douban_share").attr("href", douban_url);
+            var twitter_url = "http://s.share.baidu.com/?click=1&url=" + window.location + "&uid=0&to=twi&type=text&pic=&title=" + title + "&key=&desc=&comment=&relateUid=&searchPic=0&sign=on&l=1d6dh7hbg1d6dh7iao1d6dj0b6b&linkid=jth7sh77xiq&firstime=1553084974165";
+            $("#twitter_share").attr("href", twitter_url);
+        }
+
+        //判断主机操作系统
+        function detectOS() {
+            var isWin = (navigator.platform == "Win32") || (navigator.platform == "Windows");
+            if (isWin) return "Win";
+            var isMac = (navigator.platform == "Mac68K") || (navigator.platform == "MacPPC") || (navigator.platform == "Macintosh") || (navigator.platform == "MacIntel");
+            if (isMac) return "Mac";
+            var isUnix = (navigator.platform == "X11") && !isWin && !isMac;
+            if (isUnix) return "Unix";
+            var isLinux = (String(navigator.platform).indexOf("Linux") > -1);
+            if (isLinux) return "Linux";
+        }
+        if (detectOS() == "Win") {
+            console.info("改变样式");
+            $("pre").css("font-family", "Consolas,Inconsolata,Courier,monospace");
+        } var diviceWidth = document.documentElement.clientWidth;
+        console.info(diviceWidth); if (diviceWidth <= 800) {
+            $("#imgLink").css("margin-left", "0px");
+        }
+
+    </script>
+    <script type='text/javascript' src='/statics/js/comment.js'></script>
+    <!--live看板娘相关-->
+    <script src="/statics/js/mola-tips.js"></script>
+    <script src="/statics/js/live2d.js"></script>
+    <script type="text/javascript">
+        //判断是否有足够空间显示liv2d >=769
+        var diviceWidth = document.documentElement.clientWidth;
+        if (diviceWidth >= 769) {
+            initModel();
+        }
+        // 日历相关，监听缩放大小
+        if (diviceWidth < 1366)
+            $(".root")[0].setAttribute("style", "display: none;");
+        else
+            $(".root")[0].setAttribute("style", "display: unset;");
+
+        window.onresize = function () {
+            var width = document.documentElement.clientWidth;
+            if (width < 1366)
+                $(".root")[0].setAttribute("style", "display: none;");
+            else
+                $(".root")[0].setAttribute("style", "display: unset;");
+        }
+        $(document).ready(function () {
+            //pre
+            $(".prev").mouseover(function () {
+                $(".prev").css("opacity", "1");
+            });
+            $(".prev").mouseout(function () {
+                $(".prev").css("opacity", "0.2");
+            });
+
+            //next
+            $(".next").mouseover(function () {
+                $(".next").css("opacity", "1");
+            });
+            $(".next").mouseout(function () {
+                $(".next").css("opacity", "0.2");
+            });
+        })
+    </script>
+</footer>
+</body>
+
+</html>

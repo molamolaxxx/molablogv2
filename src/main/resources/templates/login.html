@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>molamola博客管理系统登录</title>
+        <link rel="stylesheet" href="statics/layui/css/layui.css" media="all" />
+        <link rel="icon" type="image/x-icon" href="statics/images/favicon.ico">
+
+        <!--样式-->
+        <style>
+            html,body{
+                height: 100%;
+                margin: 0 auto;
+                padding: 0;
+                position: relative;
+                background-image: url("statics/images/wall.jpeg");
+                background-size: cover;
+            }
+            .wrapper{
+                position: absolute;
+                left:0;
+                top: 0;
+                bottom: 0;
+                right: 0;
+                margin: auto;
+                width: 500px;
+                height: 300px;
+            }
+
+            .head img{
+                position: absolute;
+                left:0;
+                right: 0;
+                margin: auto;
+                height: 50px;
+            }
+            .main{
+                position: relative;
+                top: 60px;
+                height: 240px;
+            }
+            .layui-form-item{
+                position: relative;
+                text-align: center;
+                margin-top: 15px;
+                left: 20%;
+                width: 60%;
+            }
+
+            input{
+                color: white ;
+                background: none !important;
+            }
+
+            .captcha>img{
+                float: right;
+                width: 40%;
+                height: 38px;
+                cursor:pointer;
+            }
+
+            .captcha>input{
+                width: 60%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="head">
+                <img src="statics/images/omikron.png" />
+            </div>
+            <div class="main">
+                <form class="layui-form" name="loginForm">
+                    <div class="layui-form-item">
+                        <input class="layui-input" type="text" name="username" autocomplete="off" placeholder="用户名" lay-verify="require" />
+                    </div>
+                    <div class="layui-form-item">
+                        <input class="layui-input" type="password" name="password" autocomplete="off" placeholder="密码" lay-verify="require" />
+                    </div>
+                    <div class="layui-form-item captcha">
+                        <img id="checkImg" src="validate/checkcode" onclick="this.src=this.src+'?'"/>
+                        <input class="layui-input" type="text" name="checkcode" autocomplete="off" placeholder="请输入验证码" lay-verify="require" />
+                    </div>
+                    <div class="layui-form-item">
+                        <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="go">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <script type="text/javascript" src="statics/layui/layui.js"></script>
+
+        <!--登录验证-->
+        <script>
+            layui.use(['layer', 'form'], function() {
+                //加载所需模块
+                var layer = layui.layer,
+                    form = layui.form,
+                    $ = layui.jquery;
+
+            //判断是否已经登录
+            $.ajax({
+                url: "session/user",
+                dataType: "json",
+                type: "get",
+                success: function (result) {
+                    if(result.status == 0) {
+                        //发送重定向
+                        layer.alert('您已经登录，将直接跳转主页', {icon: 1});
+                        setTimeout(function () {
+                            location.replace("blogmanager");
+                        }, 1500);
+                    }
+                }
+            });
+            //表单验证
+            form.verify({
+                require:function(value,item){
+                    if(item.name=="username"&&value==""){
+                        return "请输入用户名";
+                    }else if(item.name=="password"&&value==""){
+                        return "请输入密码";
+                    }else if(item.name=="checkcode"&&value==""){
+                        return "请输入验证码";
+                    }
+                }
+            });
+
+            //ajax请求登录,登录成功则跳转到后台管理页面,否则刷新验证码
+            form.on('submit(go)', function(data){
+
+                var form = new FormData();
+                form.append("username",data.field.username);
+                form.append("password",data.field.password);
+                form.append("checkcode",data.field.checkcode);
+
+
+                $.ajax({
+                    url:"user/login",
+                    contentType: false,
+                    processData: false,
+                    data:form,
+                    type: "post",
+                    success:function(result){
+
+                        if(result.status == 0){
+                            location.replace("blogmanager");
+                        }
+                        else if(result.status == 3){
+                            layer.alert(result.msg, {icon: 2}, function(index) {
+                                getCheckCode();
+                                document.getElementsByName("checkcode")[0].value = "";
+                                layer.close(index)
+                            });
+                        }
+                        else{
+                            layer.alert(result.msg, {icon: 2});
+                            getCheckCode();
+                        }
+
+                    }
+                });
+                return false;
+            });
+
+            //获取验证码
+            function getCheckCode() {
+                $("#checkImg").click();
+            }
+        });
+        </script>
+    </body>
+</html>

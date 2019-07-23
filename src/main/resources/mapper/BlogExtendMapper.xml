@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--blogMapper 的扩充mapper -->
+<mapper namespace="com.mola.molablogv2.repository.BlogMapper">
+    <!--服务端搜索map-->
+    <resultMap id="ResultMap" type="com.mola.molablogv2.pojo.Blog">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="title" jdbcType="VARCHAR" property="title" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="content" jdbcType="VARCHAR" property="content" />
+        <result column="text" jdbcType="VARCHAR" property="text" />
+        <result column="pv" jdbcType="INTEGER" property="pv" />
+        <result column="published" jdbcType="INTEGER" property="published" />
+        <result column="user_id" jdbcType="INTEGER" property="userId" />
+        <result column="class_id" jdbcType="INTEGER" property="classId" />
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    </resultMap>
+
+    <!--根据分类搜索博客(多表)-->
+    <select id="searchByType" resultMap="ResultMap">
+        SELECT
+            blog.id,
+            blog.title,
+            blog.content,
+            blog.text,
+            blog.create_time,
+            blog.update_time,
+            blog.pv,
+            blog.published,
+            blog.class_id,
+            blog.user_id,
+            blog_type.class_name
+        FROM
+          blog,blog_type
+        WHERE
+          blog.user_id=#{userId}
+        AND
+          blog.class_id=blog_type.id
+        AND
+        blog_type.class_name
+        LIKE
+          concat(concat('%',#{keyword}),'%')
+    </select>
+
+    <!--获取前一个博客的信息
+    &lt; 小于号
+    &gt; 大于号
+    -->
+    <select id="pre" resultMap="ResultMap" parameterType="int">
+        SELECT
+        id,title
+        FROM
+        blog
+        WHERE
+        id=(SELECT max(id) from blog where id &lt; #{blogId} AND blog.published=0)
+    </select>
+
+    <select id="next" resultMap="ResultMap" parameterType="int">
+        SELECT
+        id,title
+        FROM
+        blog
+        WHERE
+        id=(SELECT min(id) from blog where id &gt; #{blogId} AND blog.published=0)
+    </select>
+</mapper>

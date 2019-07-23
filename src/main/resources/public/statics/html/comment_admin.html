@@ -1,0 +1,103 @@
+<div style="padding: 15px;">
+    <table id="comment_table" lay-filter="comment_table"></table>
+</div>
+
+<!-- 博客管理工具条渲染模版-->
+<script type="text/html" id="comment_table_bar">
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delComment">删除</a>
+</script>
+
+<!--转换时间方法-->
+<script type="text/javascript" >
+    function parseTime(time){
+        var date = new Date(time);//如果date为13位不需要乘1000
+        var Y = date.getFullYear() + '-';
+        var M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+        var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+        var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+        var m = (date.getMinutes() <10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+        var s = (date.getSeconds() <10 ? '0' + date.getSeconds() : date.getSeconds());
+        return Y+M+D+h+m+s;
+    }
+</script>
+
+<script id="parseTime" type="text/html">
+    {{parseTime(d.time)}}
+</script>
+
+<style>
+    div.layui-layer-content{
+        overflow:visible !important;
+    }
+</style>
+
+<script>
+    var commentData;
+    layui.use('table', function() {
+        var table = layui.table;
+        //文章管理表格
+        table.render({
+            elem: '#comment_table',
+            width: 1600,
+            height: 750,
+            url: '/molablog/comment/'+window.commentInfo.blogId,  //数据接口
+            done: function (res, curr, count) {
+                commentData = JSON.stringify(res);
+            },
+            page: true, //开启分页
+            request: {
+                pageName: 'offset' //页码的参数名称，默认：page
+                , limitName: 'limit' //每页数据量的参数名，默认：limit
+            },
+            cols: [[    //表头
+                {field: 'name', title: '昵称', width: 180},
+                {field: 'content', title: '内容', width: 420},
+                {
+                    field: 'createTime', title: '发表时间', width: 180, sort: true, templet: function (d) {
+                        //console.log(d)
+                        var date = new Date(d.createTime);//如果date为13位不需要乘1000
+                        var Y = date.getFullYear() + '-';
+                        var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+                        var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate()) + ' ';
+                        var h = (date.getHours() < 10 ? '0' + date.getHours() : date.getHours()) + ':';
+                        var m = (date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()) + ':';
+                        var s = (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds());
+                        return Y + M + D + h + m + s;
+                    }
+                },
+                {field: 'email', title: '邮箱', width: 180},
+                {field: 'friendLink', title: '友链', width: 180},
+                {field: 'imgLink', title: '头像图片链接', width: 180},
+                {field: 'ip', title: 'ip地址', width: 180},
+                {title: '操作', align: 'center', width: 180, toolbar: '#comment_table_bar'}
+            ]]
+        });
+        //文章表格工具条事件监听
+        table.on('tool(comment_table)', function (obj) { //tool是工具条事件名，参数是table原始容器的lay-filter属性值
+            var layEvent = obj.event; //获得 lay-event 对应的值
+            if (layEvent === 'delComment') { //删除
+                layer.confirm('确定要删除该评论吗？', function (index) {
+                    layer.close(index);
+                    layer.load(1);
+                    //向服务器发送删除文章请求
+                    layui.jquery.ajax({
+                        url: "/molablog/comment/"+obj.data.id,
+                        type: "DELETE",
+                        data:JSON.stringify({
+                        }),
+                        contentType: "application/json; charset=utf-8",
+                        success: function (result) {
+                            layer.closeAll('loading');//关闭loading图标
+                            layer.msg("删除成功", {icon: 1});
+                            obj.del(); //删除表格对应行并更新缓存
+                        },
+                        error: function (result) {
+                            layer.closeAll('loading');
+                            layer.msg(result.responseText, {icon: 2});
+                        }
+                    })
+                });
+            }
+        });
+    });
+</script>
