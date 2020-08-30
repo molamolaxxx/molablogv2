@@ -118,8 +118,10 @@ public class BlogServiceImpl implements BlogService {
     @Override
     @Transactional
     public Integer insert(BlogDTO blogDTO) {
+
         Blog blog = new Blog();
         CopyUtils.copyProperties(blogDTO,blog);
+        blog.setPv(0);
 
         Integer result = null;
         try {

@@ -1,0 +1,29 @@
+23:45:00.206 default [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+23:45:00.207 default [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+23:45:02.937 default [restartedMain] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$f2196aac] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+23:45:03.602 default [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+23:45:03.623 default [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+23:45:03.638 default [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+23:45:03.639 default [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.19]
+23:45:03.744 default [restartedMain] INFO  o.a.c.c.C.[.[localhost].[/molablog] - Initializing Spring embedded WebApplicationContext
+23:45:03.745 default [restartedMain] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 3537 ms
+23:45:05.221 default [restartedMain] INFO  o.s.s.c.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+23:45:05.546 default [restartedMain] WARN  o.t.templatemode.TemplateMode - [THYMELEAF][restartedMain] Template Mode 'LEGACYHTML5' is deprecated. Using Template Mode 'HTML' instead.
+23:45:06.550 default [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+23:45:06.717 default [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+23:45:06.839 default [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path '/molablog'
+23:45:07.023 default [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 9001 (http)
+23:45:07.025 default [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-127.0.0.1-9001"]
+23:45:07.026 default [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+23:45:07.031 default [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.19]
+23:45:07.047 default [restartedMain] INFO  o.a.c.c.C.[Tomcat-1].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+23:45:07.048 default [restartedMain] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 200 ms
+23:45:07.132 default [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 16 endpoint(s) beneath base path '/actuator'
+23:45:07.233 default [restartedMain] INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-127.0.0.1-9001"]
+23:45:07.309 default [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 9001 (http) with context path ''
+23:45:07.612 default [RMI TCP Connection(16)-127.0.0.1] INFO  o.a.c.c.C.[.[localhost].[/molablog] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+23:45:07.613 default [RMI TCP Connection(16)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+23:45:07.637 default [RMI TCP Connection(16)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 24 ms
+23:45:07.902 default [RMI TCP Connection(17)-127.0.0.1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+23:45:36.335 default [http-nio-8080-exec-1] INFO  com.baidu.ueditor.ConfigManager - configPath:/home/molamola/molablog-app/conf/config.json
+23:45:49.246 default [http-nio-8080-exec-3] INFO  com.baidu.ueditor.ConfigManager - configPath:/home/molamola/molablog-app/conf/config.json

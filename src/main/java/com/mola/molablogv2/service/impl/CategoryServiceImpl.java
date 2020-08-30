@@ -64,6 +64,7 @@ public class CategoryServiceImpl implements CategoryService {
             r.setText(null);
             r.setUpdateTime(null);
             r.setClassName(typeMap.get(r.getClassId()));
+            r.setContent(null);
         }
 
         return result;

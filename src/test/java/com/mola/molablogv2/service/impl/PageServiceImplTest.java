@@ -1,6 +1,5 @@
 package com.mola.molablogv2.service.impl;
 
-import com.mola.molablogv2.service.client.PageService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +16,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class PageServiceImplTest {
 
     @Autowired
-    private PageService pageService;
+    private PageServiceImpl pageService;
 
     @Test
     public void addPreview() {
         pageService.addPreview(53);
     }
+
 }

@@ -15,6 +15,13 @@
     .inline-button{
         width:100px !important;
     }
+    .updownfix{
+        position: fixed;
+        bottom: 4rem;
+        height: 4.2rem;
+        right: 3rem;
+        text-align: center;
+    }
     #container{
         z-index: -1;
         position: relative;
@@ -53,6 +60,9 @@
         </div>
     </div>
 </form>
+<button type="button" id="updown" class="layui-btn layui-btn-lg layui-btn-radius layui-btn-normal updownfix" onclick="upAndDown()"><i id= "udIcon" class="layui-icon layui-icon-up" style="
+    margin-right: 0px;
+"></i></button>
 
 <!--<div class="inline-button-div">
     <div class="layui-input-inline inline-button">

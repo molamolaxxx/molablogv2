@@ -110,7 +110,7 @@ public class PageController {
         BeanUtils.copyProperties(form,dto);
         dto.setIp(IpUtils.getIp(request));
         try {
-            pageService.insertComment(dto);
+            pageService.insertComment(dto, form.getBlogName());
         } catch (ClientException e) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             return ServerResponse.createByErrorCodeMessage(e.getCode(),e.getMessage());

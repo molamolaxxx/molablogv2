@@ -1,6 +1,7 @@
 layui.use(['jquery', 'form'], function() {
     var $ = layui.jquery,
         form = layui.form,
+        $layuiBody = $(".layui-body")[0],
         $form = $('#typeForm'),
         ue = UE.getEditor('container',{autoFloatEnabled:false}),
         createTime,
@@ -242,4 +243,51 @@ layui.use(['jquery', 'form'], function() {
         }
         return true;
     }
+    var udd = $("#updown")
+    udd.isToTop = true;
+    upAndDown = function() {
+        if (udd.isToTop){
+            var top = 0;
+        }else {
+            var top = 1000000;
+        }
+        $("#udIcon").animate({opacity:0},function(){
+            if (udd.isToTop){
+                $("#udIcon").removeClass("layui-icon-up")
+                $("#udIcon").addClass("layui-icon-down")
+            }else {
+                $("#udIcon").removeClass("layui-icon-down")
+                $("#udIcon").addClass("layui-icon-up")
+            }
+            udd.isToTop = !udd.isToTop
+            $("#udIcon").animate({opacity:1})
+        })
+
+        $layuiBody.scrollTo({
+            top:top,
+            behavior: "smooth"
+        })
+
+    }
+    // 滑动
+    setTimeout(function () {
+            $bar = document.getElementById("edui1_toolbarbox");
+            var preStyle = $bar.style;
+            $layuiBody.onscroll = function (ev) {
+            var scrollTop = $layuiBody.scrollTop;
+            if (scrollTop > 260) {
+                // 将bar变成fix
+                $bar.style = "position: fixed; z-index: 9999; margin-top: -175px; width: 67.5%;";
+            }
+            if (scrollTop < 200) {
+                $bar.style = preStyle;
+            }
+        }
+    }, 200);
+
 });
+
+
+
+
+

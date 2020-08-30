@@ -1,5 +1,6 @@
 package com.mola.molablogv2.service.impl;
 
+import com.mola.molablogv2.common.CommonService;
 import com.mola.molablogv2.dto.CommentDTO;
 import com.mola.molablogv2.dto.ManageDTO;
 import com.mola.molablogv2.dto.client.ClientDTO;
@@ -41,6 +42,9 @@ public class PageServiceImpl implements PageService {
 
     @Autowired
     private BlogCommentService commentService;
+
+    @Autowired
+    private CommonService commonService;
 
     @Override
     public ClientDTO selectOne(Integer blogId) {
@@ -124,7 +128,7 @@ public class PageServiceImpl implements PageService {
     }
 
     @Override
-    public Integer insertComment(CommentDTO dto) {
+    public Integer insertComment(CommentDTO dto, String blogTitle) {
 
         Integer result = null;
         try {
@@ -134,7 +138,9 @@ public class PageServiceImpl implements PageService {
             throw new ClientException(ClientErrorEmun.INSERT_COMMENT_ERROR,e.getMessage());
         }
 
-        //todo 发送邮件
+        //发送邮件
+        commonService.send(dto, blogTitle);
+
         return result;
     }
 
@@ -144,7 +150,6 @@ public class PageServiceImpl implements PageService {
 
         //1.查询
         Blog  blog = blogMapper.selectByPrimaryKey(blogId);
-
 
         if (null == blog){
             throw new ClientException(ClientErrorEmun.NO_BLOG_EXIST);
@@ -162,4 +167,5 @@ public class PageServiceImpl implements PageService {
 
         return result;
     }
+
 }

@@ -139,8 +139,18 @@
     <link rel="stylesheet" type="text/css" href="/statics/css/waifu.css" />
     <link rel="stylesheet" type="text/css" href="/statics/css/flat-ui.min.css" />
     <link rel="stylesheet" type="text/css" href="/statics/css/calender.css" />
+    <link rel="stylesheet" type="text/css" href="/statics/css/mulu-blog.css" />
 </head>
 <body class="home blog custom-background round-avatars" itemscope itemtype="http://schema.org/Organization">
+<div id="mulu">
+    <div class="c-a">
+        <div class="index-box"><span id="table-of-contents">目录</span><span class="post-menutree-title-handle">
+                <ul class="toc">
+                </ul>
+        </div>
+        <div id="t"></div>
+    </div>
+</div>
 <div class="Yarn_Background" style="background-image: url(/abs.jpg);"></div>
 <form class="js-search search-form search-form--modal" method="get" action="/search.html" role="search">
     <div class="search-form__inner">
@@ -171,7 +181,7 @@
                         <ul id="primary-menu" class="menu">
                             <li id="menu-item-17"
                                 class="menu-item menu-item-type-custom menu-item-object-custom menu-item-17">
-                                <span class="menu-dropdown"><i class="iconfont">\uE619</i></span>
+                                <span class="menu-dropdown"><i class="iconfont"></i></span>
                                 <a href="/">首页</a>
                                 <ul class="sub-menu">
                                     <li id="menu-item-165"
@@ -477,11 +487,13 @@
     <script type='text/javascript' src='/statics/js/aos.js'></script>
     <script type='text/javascript' src='/statics/js/prism.js'></script>
     <script type='text/javascript' src='/statics/js/gravatar.js'></script>
+    <script type='text/javascript' src='/statics/js/mulu.js'></script>
+    <script type='text/javascript' src='/statics/js/mulu-blog.js'></script>
     <script type='text/javascript' charset="utf-8">
 
         //获取页面传来的blogId
         var href = location.href;
-        var blogId = href.substring(href.indexOf("page")+5);
+        var blogId = href.substring(href.lastIndexOf("/")+1);
 
 
         //分享
@@ -538,19 +550,31 @@
         if (diviceWidth >= 769) {
             initModel();
         }
-        // 日历相关，监听缩放大小
-        if (diviceWidth < 1366)
-            $(".root")[0].setAttribute("style", "display: none;");
-        else
-            $(".root")[0].setAttribute("style", "display: unset;");
+        // 日历、目录相关，监听缩放大小
+        var cal = $(".root")[0]
+        var mulu = $("#mulu")
+        if (diviceWidth < 1366){
+            cal.setAttribute("style", "display: none;");
+            mulu.attr("style","display:none")
+        }
+        else {
+            cal.setAttribute("style", "display: unset;");
+        }
 
         window.onresize = function () {
             var width = document.documentElement.clientWidth;
-            if (width < 1366)
-                $(".root")[0].setAttribute("style", "display: none;");
-            else
-                $(".root")[0].setAttribute("style", "display: unset;");
+            if (width < 1366){
+                cal.setAttribute("style", "display: none;");
+                mulu.attr("style","display:none")
+            }
+            else {
+                cal.setAttribute("style", "display: unset;");
+                mulu.attr("style","opacity:1")
+            }
+            // 监听目录
         }
+
+
         $(document).ready(function () {
             //pre
             $(".prev").mouseover(function () {
@@ -567,6 +591,9 @@
             $(".next").mouseout(function () {
                 $(".next").css("opacity", "0.2");
             });
+
+            //透明动画
+            $(".post_content").animate({opacity:1,marginTop:30},700);
         })
     </script>
 </footer>

@@ -35,7 +35,6 @@ public class SearchServiceImpl implements SearchService {
         for (BlogDTO d : blogDTOList){
             ClientDTO one = new ClientDTO();
             BeanUtils.copyProperties(d,one);
-
             //去掉无用项
             one.setContent(null);
             one.setClassName(null);

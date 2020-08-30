@@ -1,5 +1,6 @@
 package com.mola.molablogv2.repository.example;
 
+import com.mola.molablogv2.emun.PublishStatus;
 import com.mola.molablogv2.pojo.Blog;
 import com.mola.molablogv2.pojo.example.BlogExample;
 import com.mola.molablogv2.repository.BlogMapper;
@@ -19,7 +20,6 @@ import java.util.List;
 @Component
 public class SearchExampleMapper {
 
-
     @Autowired
     private BlogMapper mapper;
 
@@ -28,7 +28,8 @@ public class SearchExampleMapper {
         keyword = "%"+keyword+"%";
         BlogExample example = new BlogExample();
         BlogExample.Criteria criteria = example.createCriteria();
-
+        // 选取已发表的内容
+        criteria.andPublishedEqualTo(PublishStatus.PUBLISHED.getCode());
         switch (kind){
             case SearchExampleConst.BY_TITLE: {
                 criteria.andTitleLike(keyword).andUserIdEqualTo(userId);

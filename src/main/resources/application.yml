@@ -6,6 +6,7 @@ spring:
     url: jdbc:mysql://127.0.0.1/molablog?characterEncoding=utf-8&useSSL=false
     type: com.alibaba.druid.pool.DruidDataSource
 
+
     # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
     initialSize: 1
@@ -16,10 +17,10 @@ spring:
     # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
     timeBetweenEvictionRunsMillis: 60000
     # 配置一个连接在池中最小生存的时间，单位是毫秒
-    minEvictableIdleTimeMillis: 30000
+    minEvictableIdleTimeMillis: 300000
     validationQuery: select 'x'
     testWhileIdle: true
-    testOnBorrow: false
+    testOnBorrow: true
     testOnReturn: false
     # 打开PSCache，并且指定每个连接上PSCache的大小
     poolPreparedStatements: true
@@ -34,7 +35,6 @@ spring:
   jackson:
     default-property-inclusion: non_null
 
-
   #模板引擎
   thymeleaf:
     cache: false
@@ -45,6 +45,7 @@ spring:
     servlet:
       content-type: text/html
     mode: LEGACYHTML5
+  #关闭默认图标
   mvc:
     favicon:
       enabled: false
@@ -53,7 +54,7 @@ server:
   servlet:
     context-path: /molablog
     session:
-      timeout: 60m
+      timeout: 180m
   port: 8080
 
 mybatis:
@@ -83,6 +84,20 @@ management:
 #个人配置
 my-conf:
   rootPath: /home/molamola/molablog-app
+
+#邮件配置
+emailConf:
+  mailHost : smtp.sohu.com
+  #邮件协议
+  mailTransportProtocol : smtp
+  #是否可信
+  mailSmtpAuth : true
+  #user
+  userName : molablog
+  #password
+  password : molablog123456
+  #port
+  port : 465
 
 
 

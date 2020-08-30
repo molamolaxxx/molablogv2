@@ -37,7 +37,7 @@ public interface PageService {
      * 插入评论
      * @return
      */
-     Integer insertComment(CommentDTO dto);
+     Integer insertComment(CommentDTO dto, String blogTitle);
 
     /**
      * 客户端获取评论列表

@@ -35,7 +35,8 @@ public class MvcConfig implements WebMvcConfigurer{
         //不拦截静态资源和登录界面
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**")
-                .excludePathPatterns(Arrays.asList("/statics/**","/","/validate/**","/user/login","/client/**","/page/**"));
+                .excludePathPatterns(Arrays.asList("/statics/**","/","/validate/**",
+                        "/user/login","/client/**","/page/**","/upload/**"));
     }
 
     /**

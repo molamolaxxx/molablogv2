@@ -34,7 +34,7 @@ public class SearchController {
         //1.通过关键字查找对应博客
         List<ClientDTO> result = null;
         try {
-            result = searchService.search(keyword,userId);
+            result = searchService.search(keyword, userId);
         } catch (CommonException | BlogException e) {
             return new SearchVO(ResponseCode.ERROR.getCode(),e.toString());
         }

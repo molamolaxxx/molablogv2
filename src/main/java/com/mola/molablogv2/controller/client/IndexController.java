@@ -43,4 +43,5 @@ public class IndexController {
 
         return ServerResponse.createBySuccess(ResponseCode.SUCCESS.getDesc(),result);
     }
+
 }
