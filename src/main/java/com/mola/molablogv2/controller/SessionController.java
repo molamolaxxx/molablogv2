@@ -29,7 +29,7 @@ public class SessionController {
      * @return
      */
     @GetMapping("/user")
-    private ServerResponse user(HttpServletRequest request){
+    public ServerResponse user(HttpServletRequest request){
 
         String username = (String) request.getSession().getAttribute("username");
         Integer userId = (Integer) request.getSession().getAttribute("userId");
@@ -48,7 +48,7 @@ public class SessionController {
     }
 
     @GetMapping("/clear")
-    private ServerResponse clear(HttpServletRequest request ,HttpServletResponse response){
+    public ServerResponse clear(HttpServletRequest request ,HttpServletResponse response){
 
         try {
             request.getSession().invalidate();

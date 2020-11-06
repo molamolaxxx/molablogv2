@@ -40,7 +40,7 @@ public class BlogController {
      * @return
      */
     @GetMapping
-    private ManageVO selectAll(@RequestParam("userId") Integer userId,
+    public ManageVO selectAll(@RequestParam("userId") Integer userId,
                                @RequestParam("offset") Integer offset,
                                @RequestParam("limit") Integer limit, HttpServletResponse response , HttpSession session){
 
@@ -71,7 +71,7 @@ public class BlogController {
     }
 
     @GetMapping("/content")
-    private ServerResponse content(@RequestParam("blogId") Integer blogId){
+    public ServerResponse content(@RequestParam("blogId") Integer blogId){
         String content = null;
         try {
             content = blogService.selectContent(blogId);
@@ -85,7 +85,7 @@ public class BlogController {
     }
 
     @PostMapping
-    private ServerResponse insert(@RequestBody BlogDTO data, HttpServletResponse response, HttpSession session){
+    public ServerResponse insert(@RequestBody BlogDTO data, HttpServletResponse response, HttpSession session){
         //判断用户是否正确
         if (!ValidUtil.userValid(response,session,data.getUserId()))
             return ServerResponse.createByErrorCodeMessage(SessionErrorEmun.USERID_ERROR.getCode(),
@@ -101,7 +101,7 @@ public class BlogController {
     }
 
     @PutMapping("/{blogId}")
-    private ServerResponse update(@PathVariable("blogId") Integer blogId ,
+    public ServerResponse update(@PathVariable("blogId") Integer blogId ,
                                   @RequestBody BlogDTO data , HttpServletResponse response, HttpSession session){
 
         //判断用户是否正确
@@ -125,7 +125,7 @@ public class BlogController {
     }
 
     @DeleteMapping("/{blogId}")
-    private ServerResponse delete(@PathVariable("blogId") Integer blogId ,
+    public ServerResponse delete(@PathVariable("blogId") Integer blogId ,
                                   @RequestBody BlogDTO data , HttpServletResponse response, HttpSession session){
         //判断用户是否正确
         if (!ValidUtil.userValid(response,session,data.getUserId()))
@@ -155,7 +155,7 @@ public class BlogController {
     }
 
     @GetMapping("/search")
-    private ManageVO search(@RequestParam("keyword") String keyword,
+    public ManageVO search(@RequestParam("keyword") String keyword,
                             @RequestParam("offset") Integer offset,
                             @RequestParam("limit") Integer limit,HttpSession session){
         //session中查找userId

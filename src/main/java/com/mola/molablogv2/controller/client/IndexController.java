@@ -26,10 +26,10 @@ import java.util.List;
 public class IndexController {
 
     @Autowired
-    private IndexService indexService;
+    public IndexService indexService;
 
     @GetMapping("/index")
-    private ServerResponse list(@RequestParam("userId") Integer userId,
+    public ServerResponse list(@RequestParam("userId") Integer userId,
                                      @RequestParam("offset") Integer offset,
                                      @RequestParam("limit") Integer limit,
                                      @RequestParam("descType") Integer descType){

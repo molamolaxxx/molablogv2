@@ -29,7 +29,7 @@ public class TypeController {
     private BlogTypeService blogTypeService;
 
     @GetMapping
-    private ServerResponse selectAll(@RequestParam("userId")Integer userId , HttpSession session ,
+    public ServerResponse selectAll(@RequestParam("userId")Integer userId , HttpSession session ,
                                      HttpServletResponse response){
 
         //判断用户是否正确
@@ -47,7 +47,7 @@ public class TypeController {
     }
 
     @GetMapping("/{id}")
-    private ServerResponse selectOne(@PathVariable("id") Integer id ,HttpServletResponse response){
+    public ServerResponse selectOne(@PathVariable("id") Integer id ,HttpServletResponse response){
 
         BlogTypeDTO blogTypeDTO = null;
 
@@ -62,7 +62,7 @@ public class TypeController {
     }
 
     @PutMapping("/update")
-    private ServerResponse update(@RequestBody BlogTypeDTO data, HttpSession session ,HttpServletResponse response){
+    public ServerResponse update(@RequestBody BlogTypeDTO data, HttpSession session ,HttpServletResponse response){
 
         //判断用户是否正确
         if (!ValidUtil.userValid(response,session,data.getUserId()))
@@ -88,7 +88,7 @@ public class TypeController {
     }
 
     @PostMapping("/insert")
-    private ServerResponse insert(@RequestBody BlogTypeDTO data , HttpSession session , HttpServletResponse response){
+    public ServerResponse insert(@RequestBody BlogTypeDTO data , HttpSession session , HttpServletResponse response){
 
         //判断用户是否正确
         if (!ValidUtil.userValid(response,session,data.getUserId()))
@@ -116,7 +116,7 @@ public class TypeController {
     }
 
     @DeleteMapping("/{id}")
-    private ServerResponse delete(@PathVariable("id") Integer id, @RequestBody BlogTypeDTO data
+    public ServerResponse delete(@PathVariable("id") Integer id, @RequestBody BlogTypeDTO data
             , HttpSession session , HttpServletResponse response){
 
         //判断用户是否正确

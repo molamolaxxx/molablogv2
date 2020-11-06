@@ -22,7 +22,7 @@ public class CommentController {
     private BlogCommentService commentService;
 
     @GetMapping("/{blogId}")
-    private ManageVO selectAll(@PathVariable("blogId")Integer blogId,
+    public ManageVO selectAll(@PathVariable("blogId")Integer blogId,
                                @RequestParam("offset") Integer offset,
                                @RequestParam("limit") Integer limit){
 
@@ -45,7 +45,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/{id}")
-    private ServerResponse delete(@PathVariable("id") Integer id){
+    public ServerResponse delete(@PathVariable("id") Integer id){
 
         try {
             commentService.delete(id);

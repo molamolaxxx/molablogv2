@@ -24,10 +24,10 @@ import java.util.List;
 public class SearchController {
 
     @Autowired
-    private SearchService searchService;
+    public SearchService searchService;
 
     @GetMapping("/search")
-    private SearchVO search(@RequestParam("keyword") String keyword,
+    public SearchVO search(@RequestParam("keyword") String keyword,
                             @RequestParam("userId") Integer userId){
 
 

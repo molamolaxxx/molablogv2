@@ -39,10 +39,10 @@ import java.text.SimpleDateFormat;
 public class PageController {
 
     @Autowired
-    private PageService pageService;
+    public PageService pageService;
 
     @GetMapping("/{id}")
-    private String blog(@PathVariable("id") Integer id , Model model , HttpServletResponse response){
+    public String blog(@PathVariable("id") Integer id , Model model , HttpServletResponse response){
         //1.查找
         ClientDTO result = null;
         try {

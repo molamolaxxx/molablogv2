@@ -1,10 +1,8 @@
 package com.mola.molablogv2.utils;
 
-import com.mola.molablogv2.common.ServerResponse;
-import com.mola.molablogv2.emun.SessionErrorEmun;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.regex.Pattern;
 
 /**
  * @Author: molamola
@@ -21,5 +19,25 @@ public class ValidUtil {
             return false;
         }
         return true;
+    }
+
+    /**
+     * 判断路径是否是图片
+     * @param path
+     * @return
+     */
+    public static boolean isImagePath(String path) {
+        String reg = ".+(.JPEG|.jpeg|.JPG|.jpg|.png|.PNG)$";
+        return Pattern.compile(reg).matcher(path).find();
+    }
+
+    /**
+     * 判断是否是数据流
+     * @param path
+     * @return
+     */
+    public static boolean isStream(String path) {
+        String reg = ".+(.MOC|.moc|.mtn)$";
+        return Pattern.compile(reg).matcher(path).find();
     }
 }

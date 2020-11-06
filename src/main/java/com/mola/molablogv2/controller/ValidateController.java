@@ -27,7 +27,7 @@ import java.io.IOException;
 public class ValidateController {
 
     @GetMapping("/checkcode")
-    private void checkCode(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
+    public void checkCode(HttpServletRequest request, HttpServletResponse response) throws IOException,ServletException {
 
         //设置相应类型,告诉浏览器输出的内容为图片
         response.setContentType("image/jpeg");
@@ -48,7 +48,7 @@ public class ValidateController {
 
     @GetMapping("/token")
     @ResponseBody
-    private String token(HttpServletRequest request){
+    public String token(HttpServletRequest request){
         return TokenUtils.getToken(request.getHeader("User-Agent"));
     }
 }

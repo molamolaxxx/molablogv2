@@ -36,7 +36,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/login")
-    private ServerResponse login(HttpServletRequest request , @Valid LoginForm loginForm,
+    public ServerResponse login(HttpServletRequest request , @Valid LoginForm loginForm,
                                  BindingResult bindingResult , HttpServletResponse response){
 
         //1.表单非空验证

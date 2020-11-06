@@ -26,10 +26,10 @@ import java.util.List;
 public class CategoryController {
 
     @Autowired
-    private CategoryService categoryService;
+    public CategoryService categoryService;
 
     @GetMapping("/category")
-    private ServerResponse list(@RequestParam("userId") Integer userId){
+    public ServerResponse list(@RequestParam("userId") Integer userId){
 
         List<ClientDTO> result = null;
         try {
