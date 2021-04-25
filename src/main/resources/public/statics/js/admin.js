@@ -62,6 +62,7 @@ load = function(view) {
     sessionJudge();
 }
 
+
 search = function() {
     selectNav(2);
     window.searchFlag = "onSearch";

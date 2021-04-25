@@ -18,6 +18,7 @@ public enum UserErrorEmun {
     USER_NOT_EXIST(4,"用户不存在"),
     MUTI_USERS_EXIST(5,"存在多个同名用户"),
     USER_PASSWORD_ERROR(6,"用户名密码错误"),
+    PRE_PASSWORD_ERROR(7,"原密码错误")
     ;
 
     private Integer code;

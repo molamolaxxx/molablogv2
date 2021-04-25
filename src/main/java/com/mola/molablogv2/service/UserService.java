@@ -16,4 +16,12 @@ public interface UserService {
      * @return
      */
     UserDTO findUserByName(String username);
+
+    /**
+     * 修改密码
+     * @param userId
+     * @param passwordPre
+     * @param passwordNow
+     */
+    void changePassword(Integer userId, String passwordPre, String passwordNow);
 }

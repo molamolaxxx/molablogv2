@@ -78,12 +78,12 @@ management:
 
   #只允许本机的9001端口操作监控
   server:
-    port: 9001
+    port: 9012
     address: 127.0.0.1
 
 #个人配置
 my-conf:
-  rootPath: /home/molamola/molablog-app
+  rootPath: /home/mola/molablog-app
 
 #邮件配置
 emailConf:
